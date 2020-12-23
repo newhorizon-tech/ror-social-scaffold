@@ -1,19 +1,18 @@
-Table friendship_request
+# Model FriendshipRequest (Through table)
 
-user_request_sender_id
-user_request_reciever _id
-status = 'pending' 'accepted' 'rejected'
+## friendship_requests (1 table)
 
-------- 
+| attribute | properties|
+| -- | -- |
+user_request_sender_id |FOREIGN KEY, INTEGER|
+user_request_reciever _id |FOREIGN KEY, INTEGER
+status | STRING
 
-Different possible scenarios
+The variable status can have three values: 'pending', 'accepted', and 'rejected'
 
-1 table -  friendship_request
+-------
+## Alternate  scenarios
 
 2 tables - friendship_request, friend_list
 
-3 - tables friendship_request, friend_list, notifications
-
-
-
-
+3 tables - friendship_request, friend_list, notifications
