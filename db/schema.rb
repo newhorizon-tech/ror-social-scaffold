@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_12_23_152602) do
   end
 
   create_table "friendship_requests", force: :cascade do |t|
+    t.string "status", default: "pending"
     t.bigint "request_receiver_id"
     t.bigint "request_sender_id"
     t.datetime "created_at", null: false
