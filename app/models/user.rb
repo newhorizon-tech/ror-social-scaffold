@@ -17,9 +17,23 @@ class User < ApplicationRecord
   end
 
   def accept_request(sender)
-    fr = FriendshipRequest.pending.where(request_receiver_id: self.id, request_sender_id: sender.id)
-    FriendshipRequest.accept_request
+    @request = FriendshipRequest.pending.where(request_receiver_id: self.id, request_sender_id: sender.id).first
+    @request.status = 'accepted'
+    @request.save
   end
 
+  def reject_request(sender)
+    @request = FriendshipRequest.pending.where(request_receiver_id: self.id, request_sender_id: sender.id).first
+    @request.status = 'rejected'
+    @request.save
+  end
 
+  def friend_ids
+    @relations = FriendshipRequest.accepted.where(request_receiver_id: self.id).or(FriendshipRequest.accepted.where(request_sender_id: self.id))
+    @relations.distinct.pluck(:request_sender_id) + @relations.distinct.pluck(:request_receiver_id) - [self.id]
+  end
+
+  def friend_list
+    User.where(id: self.friend_ids)
+  end
 end
