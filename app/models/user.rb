@@ -20,6 +20,10 @@ class User < ApplicationRecord
     end
   end
 
+  def send_request(receiver)
+    FriendshipRequest.create(request_receiver: receiver, request_sender: self)
+  end
+
   def accept_request(sender)
     @request = FriendshipRequest.pending.where(request_receiver_id: self.id, request_sender_id: sender.id).first
     @request.status = 'accepted'

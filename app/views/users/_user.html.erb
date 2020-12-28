@@ -2,5 +2,8 @@
   Name: <%= user.name %>
   <span class="profile-link">
     <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+    <% unless relation_exists?(current_user, user) %>
+      <%= link_to 'Send Request',  send_request_path(:current_user => current_user, :pending_user => user), class: 'profile-link' %>
+    <% end %>
   </span>
 </li>

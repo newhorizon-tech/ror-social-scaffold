@@ -3,5 +3,6 @@
 <% @notifications.each do |pending_user|%>
  <li> Do you want to accept <%= pending_user.name %>'s friend request? </li>
  <%= link_to 'Add Friend',  add_friend_path(:current_user => current_user, :pending_user => pending_user), class: 'btn btn-primary' %>
+ <%= link_to 'Reject Request',  reject_request_path(:current_user => current_user, :pending_user => pending_user), class: 'btn btn-danger' %>
 <% end %>
 </ul>

@@ -4,7 +4,7 @@ require 'faker'
 #Enter numbers
 
 num_users = 40   #Number of Users
-num_request = 8  #Number of users getting random friend requests
+num_request = 30  #Number of users getting random friend requests
 
 ##
 range = (1..num_users)
@@ -28,7 +28,7 @@ end
 
 (0..num_request).each do
   combo = array.sample(4)
-  array = array - [combo[0]]
+  # array = array - [combo[0]]
   user_a = User.find(combo[0])
   user_b = User.find(combo[1])
   user_c = User.find(combo[2])
