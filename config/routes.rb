@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   devise_for :users
-  
-  get '/users/notifications', to: 'users#notifications'
+  get 'add_friend' => 'users#add_friend', as: 'add_friend'
+  get 'notifications' => 'users#notifications', as: 'notifications'
   resources :users, only: [:index, :show, :notifications]
 
   resources :posts, only: [:index, :create] do

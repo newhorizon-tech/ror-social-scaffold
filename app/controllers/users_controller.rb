@@ -16,4 +16,11 @@ class UsersController < ApplicationController
       @notifications = current_user.notifications
     end
   end
+
+  def add_friend
+    u1 = User.find(params[:current_user])
+    u2 = User.find(params[:pending_user])
+    u1.accept_request(u2)
+    redirect_to notifications_path
+  end
 end
