@@ -12,8 +12,12 @@ class User < ApplicationRecord
   has_many :request_senders, class_name: 'FriendshipRequest', foreign_key: 'request_sender_id'
   has_many :request_receivers, class_name: 'FriendshipRequest', foreign_key: 'request_receiver_id'
 
+
   def notifications
-     notification_list = FriendshipRequest.pending.where(request_receiver_id: self.id)
+    @request_list = FriendshipRequest.pending.where(request_receiver:self)
+    @user_list = @request_list.map do |list_item|
+      list_item.request_sender
+    end
   end
 
   def accept_request(sender)

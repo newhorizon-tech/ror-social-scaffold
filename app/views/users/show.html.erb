@@ -1,5 +1,12 @@
 <section class="user-section">
   <h2><%= "Name: #{@user.name}" %></h2>
+  <section class="users-section">
+    <ul class="users-list">
+      <h3>Friend List:</h3>
+      <%= render @friends %>
+    </ul>
+  </section>
+
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
