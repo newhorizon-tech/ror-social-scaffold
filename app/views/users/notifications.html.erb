@@ -1,0 +1,6 @@
+<h2> Your Notifications</h2>
+ <ul>
+<% @notifications.each do |pending_user|%>
+ <li> Do you want to accept <%= pending_user.name %>'s friend request? </li>
+<% end %>
+</ul>

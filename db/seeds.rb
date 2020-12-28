@@ -1,30 +1,39 @@
 require 'humanize'
+require 'faker'
 
 #Enter numbers
 
-num_users = 30   #Number of Users
-num_request = 8  #Number of random friend requests
+num_users = 40   #Number of Users
+num_request = 8  #Number of users getting random friend requests
 
 ##
 range = (1..num_users)
+array = range.to_a
 
 # Create Users
-range.each do |i|
-  num = i.humanize.capitalize
-  @user = User.new(name: "User #{num}",
-             email: "#{num}@email.com",
+range.each do
+  username = Faker::Name.first_name.capitalize
+  @user = User.new(name: "#{username}",
+             email: "#{username}@email.com",
              password: "pineapple",
              password_confirmation: "pineapple")
   @user.save
 end
 
-array = range.to_a
+
+def friend(x, y)
+  FriendshipRequest.create(request_receiver: x, request_sender: y)
+end
 
 
-(0..num_request).each do |j|
-  combo = array.sample(2)
-  array = array - combo
+(0..num_request).each do
+  combo = array.sample(4)
+  array = array - [combo[0]]
   user_a = User.find(combo[0])
   user_b = User.find(combo[1])
-  FriendshipRequest.create(request_sender: user_a, request_receiver: user_b)
+  user_c = User.find(combo[2])
+  user_d = User.find(combo[3])
+  friend(user_a, user_b)
+  friend(user_a, user_c)
+  friend(user_a, user_d)
 end

@@ -50,6 +50,7 @@ group :test do
 end
 
 group :development do
+  gem 'faker'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
