@@ -12,12 +12,9 @@ class User < ApplicationRecord
   has_many :request_senders, class_name: 'FriendshipRequest', foreign_key: 'request_sender_id'
   has_many :request_receivers, class_name: 'FriendshipRequest', foreign_key: 'request_receiver_id'
 
-
   def notifications
-    @request_list = FriendshipRequest.pending.where(request_receiver:self)
-    @user_list = @request_list.map do |list_item|
-      list_item.request_sender
-    end
+    @request_list = FriendshipRequest.pending.where(request_receiver: self)
+    @user_list = @request_list.map(&:request_sender)
   end
 
   def send_request(receiver)
@@ -25,23 +22,23 @@ class User < ApplicationRecord
   end
 
   def accept_request(sender)
-    @request = FriendshipRequest.pending.where(request_receiver_id: self.id, request_sender_id: sender.id).first
+    @request = FriendshipRequest.pending.where(request_receiver_id: id, request_sender_id: sender.id).first
     @request.status = 'accepted'
     @request.save
   end
 
   def reject_request(sender)
-    @request = FriendshipRequest.pending.where(request_receiver_id: self.id, request_sender_id: sender.id).first
+    @request = FriendshipRequest.pending.where(request_receiver_id: id, request_sender_id: sender.id).first
     @request.status = 'rejected'
-    @request.save
+    @request.destroy
   end
 
   def friend_ids
-    @relations = FriendshipRequest.accepted.where(request_receiver_id: self.id).or(FriendshipRequest.accepted.where(request_sender_id: self.id))
-    @relations.distinct.pluck(:request_sender_id) + @relations.distinct.pluck(:request_receiver_id) - [self.id]
+    @relations = FriendshipRequest.accepted.where(request_receiver_id: id).or(FriendshipRequest.accepted.where(request_sender_id: id))
+    @relations.distinct.pluck(:request_sender_id) + @relations.distinct.pluck(:request_receiver_id) - [id]
   end
 
   def friend_list
-    User.where(id: self.friend_ids)
+    User.where(id: friend_ids)
   end
 end

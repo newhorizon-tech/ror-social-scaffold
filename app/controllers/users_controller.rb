@@ -12,9 +12,7 @@ class UsersController < ApplicationController
   end
 
   def notifications
-    if current_user
-      @notifications = current_user.notifications
-    end
+    @notifications = current_user.notifications if current_user
   end
 
   def add_friend
@@ -39,5 +37,4 @@ class UsersController < ApplicationController
     flash.notice = " Your friend request has been sent to #{u2.name}!"
     redirect_to users_path
   end
-
 end
