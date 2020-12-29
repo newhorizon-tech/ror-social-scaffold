@@ -35,6 +35,6 @@ class UsersController < ApplicationController
     u2 = User.find(params[:pending_user])
     u1.send_request(u2)
     flash.notice = " Your friend request has been sent to #{u2.name}!"
-    redirect_to users_path
+    redirect_back(fallback_location: users_path)
   end
 end

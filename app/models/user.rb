@@ -34,7 +34,11 @@ class User < ApplicationRecord
   end
 
   def friend_ids
-    @relations = FriendshipRequest.accepted.where(request_receiver_id: id).or(FriendshipRequest.accepted.where(request_sender_id: id))
+    @relations = FriendshipRequest.accepted.where(
+      request_receiver_id: id
+    ).or(FriendshipRequest.accepted.where(
+           request_sender_id: id
+         ))
     @relations.distinct.pluck(:request_sender_id) + @relations.distinct.pluck(:request_receiver_id) - [id]
   end
 
