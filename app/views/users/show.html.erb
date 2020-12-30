@@ -1,5 +1,18 @@
 <section class="user-section">
-  <h2><%= "Name: #{@user.name}" %></h2>
+  <h2><%= "Name: #{@user.name}   " %></h2>
+
+  <span class="profile-link">
+  <% unless relation_exists?(current_user, @user) %>
+      <%= link_to 'Send Request',  send_request_path(:current_user => current_user, :pending_user => @user), class: 'btn-custom' %>
+    <% end %>
+  </span>
+  <section class="users-section">
+    <ul class="users-list">
+      <h3>Friend List:</h3>
+      <%= render @friends %>
+    </ul>
+  </section>
+
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">

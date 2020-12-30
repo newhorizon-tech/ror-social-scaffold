@@ -1,6 +1,9 @@
 <li>
   Name: <%= user.name %>
   <span class="profile-link">
-    <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+    <%= link_to 'See User Profile',  user_path(user), class: 'btn-custom' %>
+    <% unless relation_exists?(current_user, user) %>
+      <%= link_to 'Send Friend Request',  send_request_path(:current_user => current_user, :pending_user => user), class: 'btn-custom' %>
+    <% end %>
   </span>
 </li>
