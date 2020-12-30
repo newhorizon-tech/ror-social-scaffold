@@ -32,16 +32,13 @@ class User < ApplicationRecord
     @request.destroy
   end
 
-  def friend_ids
+  def friend_list
     @relations = FriendshipRequest.accepted.where(
       request_receiver_id: id
     ).or(FriendshipRequest.accepted.where(
            request_sender_id: id
          ))
-    @relations.distinct.pluck(:request_sender_id) + @relations.distinct.pluck(:request_receiver_id) - [id]
-  end
-
-  def friend_list
+    friend_ids = @relations.distinct.pluck(:request_sender_id) + @relations.distinct.pluck(:request_receiver_id) - [id]
     User.where(id: friend_ids)
   end
 end
