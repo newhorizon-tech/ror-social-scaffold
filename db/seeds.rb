@@ -4,11 +4,22 @@ require 'faker'
 #Enter numbers
 
 num_users = 40   #Number of Users
-num_request = 35  #Number of users getting random friend requests
+friend_requests = 10  #Number of friend requests
+friends = 10   #Number of friends
 
 ##
-range = (1..num_users)
+range = (2..num_users+1)
 array = range.to_a
+
+
+#Create sample custom user
+@custom_user = User.new(name: "user",
+           email: "user@email.com",
+           password: "pineapple",
+           password_confirmation: "pineapple")
+@custom_user.save
+@custom_user.posts.create(content: Faker::Lorem.sentence(word_count: 12))
+
 
 # Create Users
 range.each do
@@ -31,29 +42,20 @@ def onlyrequest(x,y)
   FriendshipRequest.create(request_receiver: x, request_sender: y)
 end
 
-(0..num_request).each do |i|
-  combo = array.sample(5)
-  user_a = User.find(combo[0])
-  user_b = User.find(combo[1])
-  user_c = User.find(combo[2])
-  user_d = User.find(combo[3])
-  user_e = User.find(combo[4])
+
+(0..friend_requests).each do |i|
+  combo = array.sample(1)
+  array = array - [combo]
+  user_a = @custom_user
+  user_b = User.find(combo[0])
   onlyrequest(user_a, user_b)
-  onlyrequest(user_a, user_c)
-  onlyrequest(user_a, user_d)
-  onlyrequest(user_a, user_e)
 end
 
 
-(0..num_request).each do |i|
-  combo = array.sample(5)
-  user_a = User.find(combo[0])
-  user_b = User.find(combo[1])
-  user_c = User.find(combo[2])
-  user_d = User.find(combo[3])
-  user_e = User.find(combo[4])
+(0..friends).each do |i|
+  combo = array.sample(1)
+  array = array - [combo]
+  user_a = @custom_user
+  user_b = User.find(combo[0])
   friend(user_a, user_b)
-  friend(user_a, user_c)
-  friend(user_a, user_d)
-  friend(user_a, user_e)
 end

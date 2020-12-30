@@ -23,13 +23,12 @@ class User < ApplicationRecord
 
   def accept_request(sender)
     @request = FriendshipRequest.pending.where(request_receiver_id: id, request_sender_id: sender.id).first
-    @request.status = 'accepted'
+    @request.status = true
     @request.save
   end
 
   def reject_request(sender)
     @request = FriendshipRequest.pending.where(request_receiver_id: id, request_sender_id: sender.id).first
-    @request.status = 'rejected'
     @request.destroy
   end
 
