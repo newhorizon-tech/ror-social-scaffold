@@ -25,6 +25,10 @@ require 'database_cleaner/active_record'
 RSpec.configure do |config|
   Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
   config.include LoginHelper
+  config.before :each do
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.clean
+  end
 
   # rspec-expectations config goes here. You can use an alternate
 

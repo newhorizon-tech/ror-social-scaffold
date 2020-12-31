@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "the signup process", type: :feature do
-    before :each do
-
-    end
-
     it "successfully signs up a new user" do
       visit '/users/sign_up'
       within("#new_user") do
