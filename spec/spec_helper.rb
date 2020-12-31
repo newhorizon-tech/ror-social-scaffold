@@ -1,4 +1,4 @@
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rails/all'
 require 'capybara/rails'
 require 'database_cleaner/active_record'
@@ -16,7 +16,6 @@ require 'database_cleaner/active_record'
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-
 
 # Add additional requires below this line. Rails is not loaded until this point!
 # require 'capybara/rails'

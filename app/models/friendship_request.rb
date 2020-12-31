@@ -16,5 +16,4 @@ class FriendshipRequest < ApplicationRecord
     @request = FriendshipRequest.pending.where(friend_id: receiver.id, user_id: sender.id).first
     @request.destroy
   end
-
 end

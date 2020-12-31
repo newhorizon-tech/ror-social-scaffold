@@ -46,12 +46,12 @@ group :development, :test do
 end
 
 group :development, :test do
+  gem 'capybara', '~> 3.34'
+  gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'capybara', '~> 3.34'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'database_cleaner-active_record'
 end
 
 group :development do

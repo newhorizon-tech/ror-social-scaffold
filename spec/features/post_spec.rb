@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'creating a post', type: :feature do
   before(:each) do
-     User.create!(name: 'TestUser', email: 'testuser@email.com',
-                  password: 'pineapple', password_confirmation: 'pineapple')
-     do_login('testuser@email.com','pineapple')
+    User.create!(name: 'TestUser', email: 'testuser@email.com',
+                 password: 'pineapple', password_confirmation: 'pineapple')
+    do_login('testuser@email.com', 'pineapple')
   end
   it 'creates a valid post with content' do
     visit '/'
