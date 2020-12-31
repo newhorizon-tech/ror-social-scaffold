@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "the signin process", type: :feature do
     before :each do
-      User.create!(name: "user",
+        DatabaseCleaner.clean
+        User.create!(name: "user",
         email: "user@email.com",
         password: "pineapple",
         password_confirmation: "pineapple")
