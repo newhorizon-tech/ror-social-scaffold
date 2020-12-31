@@ -1,6 +1,6 @@
 class FriendshipRequest < ApplicationRecord
-  belongs_to :user, class_name: 'User'
-  belongs_to :friend, class_name: 'User'
+  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :friend, class_name: 'User', foreign_key: 'friend_id'
 
   scope :pending, -> { where(status: false) }
   scope :accepted, -> { where(status: true) }

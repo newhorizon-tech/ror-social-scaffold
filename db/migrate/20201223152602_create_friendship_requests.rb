@@ -3,9 +3,11 @@ class CreateFriendshipRequests < ActiveRecord::Migration[5.2]
     create_table :friendship_requests do |t|
       t.boolean :status, default: false
 
-      t.references :user, foreign_key: { to_table: :users }
-      t.references :friend, foreign_key: { to_table: :users }
+      t.integer :user_id, null: false
+      t.integer :friend_id, null: false
       t.timestamps
     end
+    add_foreign_key "friendship_requests", "users", column: "user_id"
+    add_foreign_key "friendship_requests", "users", column: "friend_id"
   end
 end
