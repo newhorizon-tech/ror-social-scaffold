@@ -1,9 +1,9 @@
 module UserHelper
   def relation_exists?(user1, user2)
     FriendshipRequest.where(
-      request_sender: user1, request_receiver: user2
+      user: user1, friend: user2
     ).or(FriendshipRequest.where(
-           request_sender: user2, request_receiver: user1
+           user: user2, friend: user1
          )).exists? or
       (user1.eql? user2)
   end

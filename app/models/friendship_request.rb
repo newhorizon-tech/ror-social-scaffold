@@ -1,7 +1,20 @@
 class FriendshipRequest < ApplicationRecord
-  belongs_to :request_sender, class_name: 'User'
-  belongs_to :request_receiver, class_name: 'User'
+  belongs_to :user, class_name: 'User'
+  belongs_to :friend, class_name: 'User'
 
   scope :pending, -> { where(status: false) }
   scope :accepted, -> { where(status: true) }
+
+  def self.accept_request(receiver, sender)
+    @request = FriendshipRequest.pending.where(friend_id: receiver.id, user_id: sender.id).first
+    @request.status = true
+    @request.save
+    FriendshipRequest.create(user: receiver, friend: sender, status: true)
+  end
+
+  def self.reject_request(receiver, sender)
+    @request = FriendshipRequest.pending.where(friend_id: receiver.id, user_id: sender.id).first
+    @request.destroy
+  end
+
 end
