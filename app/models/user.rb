@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :users, class_name: 'FriendshipRequest', foreign_key: 'user_id'
-  has_many :friends, class_name: 'FriendshipRequest', foreign_key: 'friend_id'
 
   has_many :confirmed_friendships, -> { where status: true }, class_name: 'FriendshipRequest'
   has_many :friends, through: :confirmed_friendships

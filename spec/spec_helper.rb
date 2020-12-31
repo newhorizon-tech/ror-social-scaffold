@@ -25,9 +25,14 @@ RSpec.configure do |config|
   Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
   config.include LoginHelper
   config.before :each do
+    DatabaseCleaner.start
     DatabaseCleaner.strategy = :deletion
     DatabaseCleaner.clean
   end
+  config.append_after(:each) do
+    DatabaseCleaner.clean
+  end
+
 
   # rspec-expectations config goes here. You can use an alternate
 

@@ -7,4 +7,11 @@ module UserHelper
          )).exists? or
       (user1.eql? user2)
   end
+  def request_button(current_user,user)
+    if relation_exists?(current_user, user)
+        btn_class = 'd-none'
+    else
+        btn_class = "btn-custom"
+    end
+  end
 end
