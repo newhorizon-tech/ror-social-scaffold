@@ -20,8 +20,7 @@ class PostsController < ApplicationController
   private
 
   def timeline_posts
-    @friends = current_user.friend_list
-    @selected_posts = Post.where(user: @friends).or(Post.where(user: current_user))
+    @selected_posts = Post.where(user: current_user.friends).or(Post.where(user: current_user))
     @timeline_posts ||= @selected_posts.ordered_by_most_recent.includes(:user)
   end
 

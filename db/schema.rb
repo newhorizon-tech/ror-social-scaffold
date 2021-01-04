@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 2020_12_23_152602) do
   end
 
   create_table "friendship_requests", force: :cascade do |t|
-    t.string "status", default: "pending"
-    t.bigint "request_receiver_id"
-    t.bigint "request_sender_id"
+    t.boolean "status", default: false
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["request_receiver_id"], name: "index_friendship_requests_on_request_receiver_id"
-    t.index ["request_sender_id"], name: "index_friendship_requests_on_request_sender_id"
+    t.index ["friend_id"], name: "index_friendship_requests_on_friend_id"
+    t.index ["user_id"], name: "index_friendship_requests_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -64,6 +64,6 @@ ActiveRecord::Schema.define(version: 2020_12_23_152602) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "friendship_requests", "users", column: "request_receiver_id"
-  add_foreign_key "friendship_requests", "users", column: "request_sender_id"
+  add_foreign_key "friendship_requests", "users"
+  add_foreign_key "friendship_requests", "users", column: "friend_id"
 end

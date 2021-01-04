@@ -1,11 +1,13 @@
 class CreateFriendshipRequests < ActiveRecord::Migration[5.2]
   def change
     create_table :friendship_requests do |t|
-      t.string :status, default: 'pending'
-      
-      t.references :request_receiver, foreign_key: { to_table: :users }
-      t.references :request_sender, foreign_key: { to_table: :users }
+      t.boolean :status, default: false
+
+      t.integer :user_id, null: false
+      t.integer :friend_id, null: false
       t.timestamps
     end
+    add_foreign_key "friendship_requests", "users", column: "user_id"
+    add_foreign_key "friendship_requests", "users", column: "friend_id"
   end
 end
