@@ -2,6 +2,12 @@
 
 > This is a Social app that allows users to create posts, reply with comments, send a friend request, accept a friend request and see what their friends are posting.
 
+
+![Timeline](./img/screenshot-1.png)
+
+![Notifications](./img/screenshot-2.png)
+
+
 ## Built With
 
 - Ruby v2.7.0
@@ -22,7 +28,7 @@ Postgres: >=9.5
 To get a local copy up and running follow these simple example steps.
 1. Open Terminal.
 2. Navigate to your desired location to download the contents of this repository.
-3. Clone this repository: 'git clone https://github.com/newhorizon-tech/ror-social-scaffold'
+3. Clone this repository: ```git clone https://github.com/newhorizon-tech/ror-social-scaffold```
 4. Run ```cd private-events```.
 
 ### Setup
@@ -83,5 +89,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-MIT
-
+MIT License
