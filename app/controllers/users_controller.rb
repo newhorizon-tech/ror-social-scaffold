@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def add_friend
-    u1 = User.find(params[:current_user])
+    u1 = current_user
     u2 = User.find(params[:pending_user])
     FriendshipRequest.accept_request(u1, u2)
     flash.notice = "#{u2.name} is now your friend!"
@@ -24,14 +24,14 @@ class UsersController < ApplicationController
   end
 
   def reject_request
-    u1 = User.find(params[:current_user])
+    u1 = current_user
     u2 = User.find(params[:pending_user])
     FriendshipRequest.reject_request(u1, u2)
     redirect_to notifications_path
   end
 
   def send_request
-    u1 = User.find(params[:current_user])
+    u1 = current_user
     u2 = User.find(params[:pending_user])
     FriendshipRequest.create(user: u1, friend: u2)
     flash.notice = " Your friend request has been sent to #{u2.name}!"

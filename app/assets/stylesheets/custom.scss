@@ -36,6 +36,20 @@ body {
   font-weight: 900;
 }
 
+.button_to {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  .btn-custom {
+    padding: 4px;
+    width: auto;
+    font-size: 80%;
+    font-weight: 900;
+  }
+}
+
 h1,
 h2,
 h3 {
@@ -345,6 +359,19 @@ form {
 
 @media only screen and (min-width: 480px) {
   form {
+    width: 50%;
+  }
+
+  .new_post,
+  .timeline,
+  .users-section,
+  .user-section {
+    width: 60%;
+  }
+}
+
+@media (min-width: 780px) {
+  form {
     width: 60%;
   }
 
@@ -352,19 +379,6 @@ form {
   .timeline,
   .users-section,
   .user-section {
-    width: 70%;
-  }
-}
-
-@media (min-width: 780px) {
-  form {
-    width: 40%;
-  }
-
-  .new_post,
-  .timeline,
-  .users-section,
-  .user-section {
-    width: 50%;
+    width: 60%;
   }
 }

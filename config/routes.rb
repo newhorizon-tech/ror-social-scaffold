@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   devise_for :users
-  get 'add_friend' => 'users#add_friend', as: 'add_friend'
-  get 'reject_request' => 'users#reject_request', as: 'reject_request'
-  get 'send_request' => 'users#send_request', as: 'send_request'
+  post 'add_friend' => 'users#add_friend', as: 'add_friend'
+  post 'reject_request' => 'users#reject_request', as: 'reject_request'
+  post 'send_request' => 'users#send_request', as: 'send_request'
   get 'notifications' => 'users#notifications', as: 'notifications'
   resources :users, only: [:index, :show, :notifications]
 
